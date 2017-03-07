@@ -167,6 +167,7 @@ static void HHForwardInvocation(__unsafe_unretained id target, SEL selector, NSI
         
         IMP msgForwardIMP = _objc_msgForward;
 #if !defined(__arm64__)
+        const char *typeDescription = (char *)method_getTypeEncoding(method);
         if (typeDescription[0] == '{') {
             NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:typeDescription];
             if ([methodSignature.debugDescription rangeOfString:@"is special struct return? YES"].location != NSNotFound) {
